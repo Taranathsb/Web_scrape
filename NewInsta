@@ -1,0 +1,18 @@
+import requests
+from bs4 import BeautifulSoup
+import time
+
+user_list = ['ashita_agrawal_12']
+url_format = 'https://www.instagram.com/{}/'
+for user in user_list:
+    url = url_format.format(user)
+    page = requests.get(url)
+    try:
+        r = requests.get(url)
+        soup = BeautifulSoup(r.content)
+        followers = soup.find('meta', {'name': 'description'})['content']
+        follower_count = followers.split('Followers')[0]
+        print(follower_count+","+user)
+    except Exception as ex:
+        print(ex.__str__() + " for user: " + user)
+    time.sleep(5)
