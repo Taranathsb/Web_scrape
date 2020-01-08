@@ -1,0 +1,4 @@
+df = pd.DataFrame(np.random.randn(100, 3))
+
+from scipy import stats
+df[(np.abs(stats.zscore(df)) < 3).all(axis=1)]
